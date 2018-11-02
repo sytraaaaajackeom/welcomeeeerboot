@@ -81,11 +81,11 @@ const w = ['./no2.png'];
                               ctx.font = '44px Arial';
                               ctx.fontSize = '28px';
                               ctx.fillStyle = "#FFFFFF";
-      ctx.fillText(`Welcome To ⤵`, 260, 44);
+      ctx.fillText(`Welcome To`, 260, 44);
 
 
                               //NAMEً
-                              ctx.font = '30px Arial';
+                              ctx.font = '30px Bebas';
                               ctx.fontSize = '22px';
                               ctx.fillStyle = "#FFFFFF";
       ctx.fillText(`${member.guild.name}`, 315, 76);
