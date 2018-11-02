@@ -78,7 +78,7 @@ const w = ['./no2.png'];
 })
 })
                               //NAMEً
-                              ctx.font = '44px Arial';
+                              ctx.font = '40px Bebas';
                               ctx.fontSize = '28px';
                               ctx.fillStyle = "#FFFFFF";
       ctx.fillText(`Welcome To`, 260, 44);
