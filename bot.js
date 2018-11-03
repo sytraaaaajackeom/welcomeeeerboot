@@ -186,68 +186,6 @@ client.on("message", message => {
 
 ////////////////////////////////////////////////////////////////////////
 
-client.on("message", message => {
- var prefix = "-";
-  let args = message.content.split(" ").slice(1);
-  var user = message.mentions.users.first() || args[1];
-  var muted = message.guild.roles.find(a => a.name === "Muted");
-  var reason = message.content.split(" ").slice(2).join(" ");
-  var logs = message.guild.channels.find(a => a.name.includes("log"));
- 
-  if(message.content.startsWith(prefix + "mute") || message.content.startsWith(prefix + "اسكت")) {
-    if(!message.channel.guild) return message.channel.send("**Servers Only! :x:**");
-    if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.channel.send("**You're not allowed to use this command. :x:**").then(msg => msg.devare(5000));
-    if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.channel.send("**I'm missing the following permissions: `MUTE_MEMBERS`. :x:**");
-        if(!user) return message.channel.send("**Mention someone to mute. :x:**");
-          if(!reason) return message.channel.send("**Please provide a reason. :x:**");
-      if(!muted) return message.channel.send("**Couldn't find the `Muted` role.**");
-        if(user || reason || muted) {
-            message.guild.channels.forEach(m => {
-              m.overwritePermissions(muted.id, {
-                SEND_MESSAGES: false,
-                SPEAK: false
-              })
-            })
- 
-          message.guild.member(user.id).addRole(muted) .then(message.channel.send(`**${user} Muted. :zipper_mouth:**`));
-          if(!logs) {
-            return message.channel.send("**Please create logs channel with name `log` or `logs`. :x:**");
-          }  
-          var logembed = new Discord.RichEmbed()
-          .setAuthor("Muted!", user.displayAvatarURL)
-            .addField("User", user, true)
-            .addField("By", message.author, true)
-            .addField("In", message.channel, true)
-            .setColor("BLACK");
- 
-            logs.sendEmbed(logembed);
-        }
- 
-    }
-    if(message.content.startsWith(prefix + "unmute") || message.content.startsWith(prefix + "تكلم")) {
-      if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.channel.send("**You're not allowed to use this command. :x:**").then(msg => msg.devare(5000));
-      if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.channel.send("**I'm missing the following permissions: `MANAGE_ROLES`, `MANAGE_CHANNELS`. :x:**");
-    if(message.guild.member(user.id).roles.has(muted)) {
-      return message.channel.send("**This user is already unmuted. :x:**");
- 
-    }
-    message.guild.member(user.id).removeRole(muted) .then(message.channel.send(`**${user} Unmuted. :grinning:**`));
-          if(!logs) {
-            return message.channel.send("**Please create logs channel with name `log` or `logs`. :x:**");
-          }  
-      var logembed = new Discord.RichEmbed()
-          .setAuthor("Unmuted!", user.displayAvatarURL)
-          .addField("User", user, true)
-          .addField("By", message.author, true)
-          .addField("In", message.channel, true)
-          .setColor("BLACK");
- 
-          logs.sendEmbed(logembed);
- 
-  }    
- 
-});
-
 
 ///////////////////////////////////////////////////////////////////////////////
 
